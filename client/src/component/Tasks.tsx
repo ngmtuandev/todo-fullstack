@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
-import getApiTask from "../ApiGet";
 import Task from "./Task";
-const Tasks = () => {
-  const [dataTasks, setDataTasks] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const data = await getApiTask.getAllTask();
-      setDataTasks(data?.data?.data);
-    })();
-  }, []);
-  console.log(dataTasks);
+const Tasks = ({ setTaskUpdate, setDataInput, dataTasks, setDataTasks }) => {
   return (
-    <div className="flex flex-col justify-center items-center mt-40">
+    <div className="flex flex-col justify-center items-center">
       {dataTasks?.length > 0 &&
         dataTasks.map((item, index) => {
           return (
             <div key={index}>
               <Task
+                setTaskUpdate={setTaskUpdate}
+                setDataInput={setDataInput}
                 setDataTasks={setDataTasks}
                 dataTasks={dataTasks}
                 data={item}

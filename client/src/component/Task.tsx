@@ -1,8 +1,18 @@
 import getApiTask from "../ApiGet";
-const Task = ({ data, setDataTasks, dataTasks }) => {
+const Task = ({
+  setTaskUpdate,
+  setDataInput,
+  data,
+  setDataTasks,
+  dataTasks,
+}) => {
   const handleDelete = () => {
     getApiTask.deleteTask(data?._id);
     setDataTasks(dataTasks.filter((item) => item._id !== data._id));
+  };
+  const handleUpdate = () => {
+    setDataInput(data.text);
+    setTaskUpdate(data._id);
   };
   return (
     <div className="flex justify-center my-4 flex-col">
@@ -16,7 +26,10 @@ const Task = ({ data, setDataTasks, dataTasks }) => {
         >
           Xóa
         </button>
-        <button className="px-3 py-1 bg-red-600 hover:bg-opacity-75 text-gray-200 mx-2 rounded-md">
+        <button
+          onClick={handleUpdate}
+          className="px-3 py-1 bg-red-600 hover:bg-opacity-75 text-gray-200 mx-2 rounded-md"
+        >
           Sửa
         </button>
       </div>
